@@ -1,0 +1,71 @@
+
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../../bower_components/iron-selector/iron-selector.html">
+
+<link rel="import" href="../shared-styles.html">
+
+<dom-module id="my-scan" assetpath="./">
+
+      <template>
+        <style>
+          /* CSS rules for your element */
+          .iron-selected {
+            background: #00b;
+          }
+        </style>
+        <button on-tap="requestData">Refrescar</button>
+        <!-- local DOM for your element -->
+        Wifis:
+        <ul>
+          <iron-selector attr-for-selected="ssid" on-iron-select="_itemSelected">
+            <template is="dom-repeat" items="[[wifis]]">
+                <li ssid="[[item.ssid]]">RSSI: [[item.rssi]] SSID: [[item.ssid]] BSSID: [[item.bssid]] CHANNEL: [[item.channel]]</li>           
+            </template>
+          </iron-selector>
+        </ul>
+
+        <iron-ajax
+            id="requestWifiScan"
+            url="/api/wifi/scan"
+            handle-as="json"
+            on-response="handleResponse">
+        </iron-ajax>
+
+      </template>
+
+      <script>
+        // element registration
+        Polymer({
+          is: "my-scan",
+
+          // add properties and methods on the element's prototype
+            properties: {
+              ssidSelected: { 
+                          type: String,
+                          notify: true
+                        }
+            },
+            wifis: {
+              type: Array
+            },
+            ready: function () {
+              //	Called after property values are set and local DOM is initialized.
+                this.$.requestWifiScan.generateRequest();
+            },
+            handleResponse: function (data) {
+                var result = data.detail.response;
+                this.wifis = result.wifis;
+            }  ,
+            // make the iron-ajax call
+            requestData : function() {             
+                this.$.requestWifiScan.generateRequest();
+            },
+            _itemSelected: function(e,detail)
+            {
+              this.ssidSelected = detail.item.ssid;
+            }     
+        });
+      </script>
+
+    </dom-module>

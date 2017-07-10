@@ -1,0 +1,16 @@
+# ignored Arduino
+Arduino-ESP2866-12E/.pioenvs
+Arduino-ESP2866-12E/.piolibdeps
+Arduino-ESP2866-12E/.clang_complete
+Arduino-ESP2866-12E/.vscode
+Arduino-ESP2866-12E/.gcc-flags.json
+Arduino-ESP2866-12E/data
+# not ignored
+!Arduino-ESP2866-12E/data/config.example.json
+
+# ignored Polymer
+Polymer-ESP2866-12E/bower_components
+Polymer-ESP2866-12E/build
+Polymer-ESP2866-12E/build-gzip
+Polymer-ESP2866-12E/node_modules
+Polymer-ESP2866-12E/.vscode

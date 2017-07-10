@@ -1,0 +1,42 @@
+
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-form/iron-form.html">
+<link rel="import" href="../../bower_components/iron-input/iron-input.html">
+<link rel="import" href="../shared-styles.html">
+
+<dom-module id="my-wifisave" assetpath="./">
+
+      <template>
+        <style>
+          /* CSS rules for your element */
+        </style>
+
+        <!-- local DOM for your element -->
+        <form is="iron-form"
+              id="formWifiSave" 
+              method="post" 
+              action="/api/wifi"
+              content-type="application/json">
+          <input is="iron-input"  name="ssid" label="ssid" required bind-value="{{ssid}}"></input>
+          <input is="iron-input"  name="password" label="password" required bind-value="{{password}}"></input>
+          <button>Save wifi</button>
+        </form>
+      </template>
+
+      <script>
+        // element registration
+        Polymer({
+          is: "my-wifisave",
+           properties: {
+              ssid :{
+                    type: String
+                  }
+           },          
+          password :{
+            type: String},
+          ready: function () {
+            }   
+        });
+      </script>
+
+    </dom-module>
